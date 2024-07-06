@@ -1,15 +1,18 @@
 extends CharacterBody2D
 
-@export var speed = 200
-@export var max_hunger_level = 60.0
+@export var speed = 50
+@export var max_hunger_level = 300.0
 @export var hungry_treshold = 0.8
-@export var damage = 10.0
+@export var damage = 100.0
 
 @onready var pathfinding: Pathfinding = $"../Pathfinding"
 @onready var terrain: TileMap = $"../Terrain"
 @onready var map: Map = $".."
 @onready var hunger_level = max_hunger_level
 @onready var hunger_level_bar = $HungerLevelBar
+@onready var action_cooldown = $ActionCooldown
+@onready var chop_sound = $ChopSound
+@onready var squish_sound = $SquishSound
 
 
 var path = []
@@ -28,13 +31,12 @@ func _input(event):
 		path = pathfinding.request_path(current_position, desired_position)
 		path.remove_at(0)
 		
-func _process(delta):
+func _process(_delta):
 	hunger_level_bar.value = hunger_level / max_hunger_level
 
 func _physics_process(delta):
 	hunger_level -= delta
 	if current_task == null and hunger_level < max_hunger_level * hungry_treshold:
-		print("hungry")
 		current_task = TaskManager.request_find_and_eat_food()
 	elif hunger_level < 0:
 		queue_free()
@@ -62,12 +64,22 @@ func do_current_task():
 	elif not finding_order and current_task.type == Task.TaskType.FIND_ORDER:
 		finding_order = true
 		path = pathfinding.request_path(global_position / 16, current_task.target_item.global_position / 16)
-	elif current_task.type == Task.TaskType.HARVEST:
+	elif action_cooldown.time_left <= 0.0 and current_task.type == Task.TaskType.HARVEST:
 		finding_order = false
 		harvesting = true
 		if "health" in current_task.target_item:
 			var harvestable = current_task.target_item
 			harvestable.health -= damage
+			action_cooldown.one_shot = true
+			action_cooldown.start()
+			
+			if current_task.target_item is Vegetation:
+				chop_sound.pitch_scale = randf_range(1.0, 1.5)
+				chop_sound.play()
+			elif current_task.target_item is Animal:
+				print("yo")
+				squish_sound.pitch_scale = randf_range(1.0, 1.5)
+				squish_sound.play()
 			
 			if harvestable.health <= 0:
 				var drop = harvestable.drop_item_name
@@ -80,8 +92,6 @@ func do_current_task():
 		
 		var random_target = Vector2(randi_range(-10, 10), randi_range(-10, 10))
 		random_target = random_target.clamp(Vector2.ZERO, Vector2(map.width, map.height))
-		
-		print("wandering...")
 		
 		path = pathfinding.request_path(global_position / 16, global_position / 16 + random_target)
 			

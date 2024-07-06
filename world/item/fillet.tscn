@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xs133jrdince"]
+
+[ext_resource type="PackedScene" uid="uid://c7qe2hquj1d7m" path="res://world/item/food.tscn" id="1_7nuyp"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_4pn7g"]
+
+[node name="Fillet" instance=ExtResource("1_7nuyp")]
+nutrition = 25.0
+
+[node name="Image" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_4pn7g")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 16)

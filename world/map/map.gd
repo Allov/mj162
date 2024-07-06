@@ -27,6 +27,8 @@ func _ready():
 			var value = noise.get_noise_2d(x, y)
 			if value < -0.4:
 				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.WATER])
+				if rng.randf() < 0.01:
+					ItemManager.spawn_item_by_name("fish", Vector2(x * 16, y * 16))
 			elif value >= -0.4 and value < -0.2:
 				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.SAND])
 				if rng.randf() < 0.001:

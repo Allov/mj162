@@ -11,7 +11,7 @@ extends Item
 func _ready():
 	select_area.connect("input_event", _on_select_area_input_event)
 
-func _process(delta):
+func _process(_delta):
 	health_bar.visible = health != max_health
 	health_bar.value = health / max_health
 
