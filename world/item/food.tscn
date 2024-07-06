@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7qe2hquj1d7m"]
+
+[ext_resource type="PackedScene" uid="uid://33xv2tbw68ul" path="res://world/item/item.tscn" id="1_p8k3j"]
+[ext_resource type="Script" path="res://world/item/food.gd" id="2_lkfb5"]
+
+[node name="Food" instance=ExtResource("1_p8k3j")]
+script = ExtResource("2_lkfb5")
+nutrition = 10.0

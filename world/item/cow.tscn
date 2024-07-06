@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://wmi7dyy2xsgt"]
+
+[ext_resource type="PackedScene" uid="uid://wj56g326gj08" path="res://world/item/animal.tscn" id="1_dbr83"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_whj3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq2ey"]
+size = Vector2(27, 16)
+
+[node name="Cow" instance=ExtResource("1_dbr83")]
+max_health = 10000.0
+drop_item_name = "meat"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+position = Vector2(0, 1)
+texture = ExtResource("2_whj3b")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 16)
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(17.5, 9)
+shape = SubResource("RectangleShape2D_eq2ey")

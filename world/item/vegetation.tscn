@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://muof0tsxy3tk"]
+
+[ext_resource type="PackedScene" uid="uid://33xv2tbw68ul" path="res://world/item/item.tscn" id="1_qmp3f"]
+[ext_resource type="Script" path="res://world/item/vegetation.gd" id="2_7abqg"]
+[ext_resource type="PackedScene" uid="uid://bx1703c5exvwf" path="res://assets/progress_bar.tscn" id="3_dapqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e566"]
+size = Vector2(15, 12)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ylm0"]
+bg_color = Color(1, 0.337283, 0.324989, 1)
+
+[node name="Vegetation" instance=ExtResource("1_qmp3f")]
+script = ExtResource("2_7abqg")
+max_health = 1000.0
+drop_item_name = ""
+type = 1
+
+[node name="SelectArea" type="Area2D" parent="." index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(7.5, 10)
+shape = SubResource("RectangleShape2D_2e566")
+
+[node name="HealthBar" parent="." index="1" instance=ExtResource("3_dapqp")]
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 17.0
+offset_bottom = 16.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ylm0")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://wj56g326gj08"]
+
+[ext_resource type="PackedScene" uid="uid://33xv2tbw68ul" path="res://world/item/item.tscn" id="1_no3jc"]
+[ext_resource type="Script" path="res://world/item/animal.gd" id="2_kip74"]
+[ext_resource type="PackedScene" uid="uid://bx1703c5exvwf" path="res://assets/progress_bar.tscn" id="2_tacup"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjjbd"]
+size = Vector2(15, 12)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_volwx"]
+bg_color = Color(1, 0.337283, 0.324989, 1)
+
+[node name="Animal" instance=ExtResource("1_no3jc")]
+script = ExtResource("2_kip74")
+max_health = 100.0
+drop_item_name = ""
+type = 2
+
+[node name="SelectArea" type="Area2D" parent="." index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(7.5, 10)
+shape = SubResource("RectangleShape2D_kjjbd")
+
+[node name="HealthBar" parent="." index="1" instance=ExtResource("2_tacup")]
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 17.0
+offset_bottom = 16.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_volwx")

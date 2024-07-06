@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://thn15ua0nq0v"]
+
+[ext_resource type="PackedScene" uid="uid://ce5g28w8oufwe" path="res://world/item/material.tscn" id="1_rj50d"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_hgu7u"]
+
+[node name="Wood" instance=ExtResource("1_rj50d")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_hgu7u")
+centered = false
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)

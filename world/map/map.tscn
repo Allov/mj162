@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cerc410ym5gvb"]
+
+[ext_resource type="Script" path="res://world/map/map.gd" id="1_2ugj7"]
+[ext_resource type="Texture2D" uid="uid://ekfyuy6vcrw5" path="res://assets/tileset.png" id="2_r1j7h"]
+[ext_resource type="Script" path="res://world/map/pathfinding.gd" id="3_175jq"]
+[ext_resource type="PackedScene" uid="uid://45enexsva8i5" path="res://world/pawn/pawn.tscn" id="3_i0pss"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwvc1"]
+texture = ExtResource("2_r1j7h")
+0:0/0 = 0
+0:0/0/custom_data_0 = 1.0
+1:0/0 = 0
+1:0/0/custom_data_0 = 10.0
+2:0/0 = 0
+2:0/0/custom_data_0 = 1.5
+3:0/0 = 0
+3:0/0/custom_data_0 = 1.2
+4:0/0 = 0
+4:0/0/custom_data_0 = 0.5
+
+[sub_resource type="TileSet" id="TileSet_sgke4"]
+custom_data_layer_0/name = "difficulty"
+custom_data_layer_0/type = 3
+sources/0 = SubResource("TileSetAtlasSource_lwvc1")
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_2ugj7")
+width = 256
+height = 256
+
+[node name="Terrain" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sgke4")
+format = 2
+
+[node name="Pathfinding" type="Node2D" parent="."]
+script = ExtResource("3_175jq")
+
+[node name="Pawn" parent="." instance=ExtResource("3_i0pss")]
+position = Vector2(64, 80)
+
+[node name="Pawn2" parent="." instance=ExtResource("3_i0pss")]
+position = Vector2(144, 64)
+
+[node name="Pawn3" parent="." instance=ExtResource("3_i0pss")]
+position = Vector2(128, 144)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://45enexsva8i5"]
+
+[ext_resource type="Script" path="res://world/pawn/pawn.gd" id="1_xcnyn"]
+[ext_resource type="Texture2D" uid="uid://5idbhlpmano5" path="res://assets/pawn.png" id="2_hv3gn"]
+[ext_resource type="PackedScene" uid="uid://bx1703c5exvwf" path="res://assets/progress_bar.tscn" id="3_018hf"]
+
+[node name="Pawn" type="CharacterBody2D"]
+script = ExtResource("1_xcnyn")
+
+[node name="Image" type="Sprite2D" parent="."]
+texture = ExtResource("2_hv3gn")
+centered = false
+
+[node name="HungerLevelBar" parent="." instance=ExtResource("3_018hf")]

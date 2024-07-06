@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://r5dglugqsuyq"]
+
+[ext_resource type="PackedScene" uid="uid://muof0tsxy3tk" path="res://world/item/vegetation.tscn" id="1_utryu"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_im524"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6weai"]
+size = Vector2(23, 29)
+
+[node name="Tree" instance=ExtResource("1_utryu")]
+drop_item_name = "wood"
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(15.5, 18.5)
+shape = SubResource("RectangleShape2D_6weai")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(1, 1)
+texture = ExtResource("2_im524")
+centered = false
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 32)

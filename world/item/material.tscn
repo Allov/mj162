@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce5g28w8oufwe"]
+
+[ext_resource type="PackedScene" uid="uid://33xv2tbw68ul" path="res://world/item/item.tscn" id="1_6j7fq"]
+[ext_resource type="Script" path="res://world/item/material.gd" id="2_1h2uj"]
+
+[node name="Mats" instance=ExtResource("1_6j7fq")]
+script = ExtResource("2_1h2uj")
+type = 4

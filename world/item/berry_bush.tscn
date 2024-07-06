@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctl2ctj1hho4n"]
+
+[ext_resource type="PackedScene" uid="uid://muof0tsxy3tk" path="res://world/item/vegetation.tscn" id="1_h0b1h"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_c15gu"]
+
+[node name="BerryBush" instance=ExtResource("1_h0b1h")]
+drop_item_name = "berry"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_c15gu")
+centered = false
+region_enabled = true
+region_rect = Rect2(17, 0, 15, 16)
