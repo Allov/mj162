@@ -17,6 +17,7 @@ texture = ExtResource("2_r1j7h")
 3:0/0/custom_data_0 = 1.2
 4:0/0 = 0
 4:0/0/custom_data_0 = 0.5
+5:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_sgke4"]
 custom_data_layer_0/name = "difficulty"
@@ -27,6 +28,7 @@ sources/0 = SubResource("TileSetAtlasSource_lwvc1")
 script = ExtResource("1_2ugj7")
 width = 256
 height = 256
+seed_name = "malicieux"
 
 [node name="Terrain" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_sgke4")
@@ -39,7 +41,7 @@ script = ExtResource("3_175jq")
 position = Vector2(64, 80)
 
 [node name="Pawn2" parent="." instance=ExtResource("3_i0pss")]
-position = Vector2(144, 64)
+position = Vector2(96, 32)
 
 [node name="Pawn3" parent="." instance=ExtResource("3_i0pss")]
-position = Vector2(128, 144)
+position = Vector2(160, 80)

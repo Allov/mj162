@@ -8,6 +8,8 @@ size = Vector2(23, 29)
 
 [node name="Tree" instance=ExtResource("1_utryu")]
 drop_item_name = "wood"
+drop_quantity = 10
+item_name = "tree"
 
 [node name="CollisionShape2D" parent="SelectArea" index="0"]
 position = Vector2(15.5, 18.5)
@@ -19,3 +21,9 @@ texture = ExtResource("2_im524")
 centered = false
 region_enabled = true
 region_rect = Rect2(32, 16, 32, 32)
+
+[node name="HealthBar" parent="." index="2"]
+offset_left = 9.0
+offset_top = 32.0
+offset_right = 25.0
+offset_bottom = 33.0

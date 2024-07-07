@@ -14,6 +14,7 @@ bg_color = Color(1, 0.337283, 0.324989, 1)
 script = ExtResource("2_kip74")
 max_health = 100.0
 drop_item_name = ""
+drop_quantity = 1
 type = 2
 
 [node name="SelectArea" type="Area2D" parent="." index="0"]

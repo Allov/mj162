@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5h3nfpgnoj48"]
+
+[ext_resource type="PackedScene" uid="uid://b0s01mgv8nmga" path="res://world/item/building.tscn" id="1_m8xdt"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_uk3mj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vvq6"]
+size = Vector2(10, 15)
+
+[node name="Wall" instance=ExtResource("1_m8xdt")]
+mat_1_name = "wood"
+mat_1_quantiy = 1
+mat_2_name = "bone"
+mat_2_quantiy = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_uk3mj")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 96, 16, 16)
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(8, 8.5)
+shape = SubResource("RectangleShape2D_2vvq6")

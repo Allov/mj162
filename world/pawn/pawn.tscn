@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://45enexsva8i5"]
+[gd_scene load_steps=8 format=3 uid="uid://45enexsva8i5"]
 
 [ext_resource type="Script" path="res://world/pawn/pawn.gd" id="1_xcnyn"]
 [ext_resource type="Texture2D" uid="uid://5idbhlpmano5" path="res://assets/pawn.png" id="2_hv3gn"]
 [ext_resource type="PackedScene" uid="uid://bx1703c5exvwf" path="res://assets/progress_bar.tscn" id="3_018hf"]
 [ext_resource type="AudioStream" uid="uid://b7so3njtvpsbc" path="res://assets/chop.mp3" id="4_oimci"]
 [ext_resource type="AudioStream" uid="uid://dwf4muqs3eswn" path="res://assets/squish.mp3" id="5_tt7m0"]
+[ext_resource type="PackedScene" uid="uid://b77uhmudpc850" path="res://assets/debug_label.tscn" id="6_bklkl"]
+[ext_resource type="AudioStream" uid="uid://eoa48eowulwx" path="res://assets/hammer.wav" id="6_fd0u6"]
 
 [node name="Pawn" type="CharacterBody2D"]
 z_index = 6
@@ -30,3 +32,17 @@ stream = ExtResource("5_tt7m0")
 max_distance = 300.0
 attenuation = 3.86374
 bus = &"SFX"
+
+[node name="HammerSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fd0u6")
+volume_db = 10.0
+max_distance = 300.0
+attenuation = 3.86374
+bus = &"SFX"
+
+[node name="DebugLabel" parent="." instance=ExtResource("6_bklkl")]
+offset_top = 12.0
+offset_right = 63.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 10
+text = "doing nothingw"

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceqehex76nrpe"]
+
+[ext_resource type="PackedScene" uid="uid://ce5g28w8oufwe" path="res://world/item/material.tscn" id="1_p43kq"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_q6pjj"]
+
+[node name="Bone" instance=ExtResource("1_p43kq")]
+item_name = "bone"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_q6pjj")
+centered = false
+region_enabled = true
+region_rect = Rect2(32, 64, 16, 16)

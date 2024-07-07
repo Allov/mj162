@@ -7,8 +7,10 @@
 size = Vector2(27, 16)
 
 [node name="Fish" instance=ExtResource("1_unuhd")]
-max_health = 5000.0
+max_health = 3000.0
 drop_item_name = "fillet"
+drop_quantity = 5
+item_name = "fish"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(0, 1)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cncwajuv4ugpx"]
+
+[ext_resource type="PackedScene" uid="uid://muof0tsxy3tk" path="res://world/item/vegetation.tscn" id="1_2kul4"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_xt0x8"]
+
+[node name="Skeleton" instance=ExtResource("1_2kul4")]
+drop_item_name = "bone"
+drop_quantity = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_xt0x8")
+centered = false
+region_enabled = true
+region_rect = Rect2(16, 64, 16, 16)

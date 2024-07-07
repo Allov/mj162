@@ -9,6 +9,8 @@ size = Vector2(27, 16)
 [node name="Cow" instance=ExtResource("1_dbr83")]
 max_health = 10000.0
 drop_item_name = "meat"
+drop_quantity = 15
+item_name = "cow"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(0, 1)

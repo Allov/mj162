@@ -4,7 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_c15gu"]
 
 [node name="BerryBush" instance=ExtResource("1_h0b1h")]
+max_health = 2000.0
 drop_item_name = "berry"
+drop_quantity = 25
+item_name = "berry_bush"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_c15gu")

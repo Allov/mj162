@@ -5,6 +5,7 @@
 
 [node name="Fillet" instance=ExtResource("1_7nuyp")]
 nutrition = 25.0
+item_name = "fillet"
 
 [node name="Image" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_4pn7g")

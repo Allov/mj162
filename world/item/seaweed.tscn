@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxdosn2hkuqhh"]
+
+[ext_resource type="PackedScene" uid="uid://muof0tsxy3tk" path="res://world/item/vegetation.tscn" id="1_1nr4b"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_trcfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfr4d"]
+size = Vector2(11, 12)
+
+[node name="Seaweed" instance=ExtResource("1_1nr4b")]
+drop_quantity = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_trcfe")
+centered = false
+region_enabled = true
+region_rect = Rect2(80, 0, 16, 16)
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(6.5, 10)
+shape = SubResource("RectangleShape2D_yfr4d")

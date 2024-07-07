@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnj2676lrwchr"]
+
+[ext_resource type="PackedScene" uid="uid://b0s01mgv8nmga" path="res://world/item/building.tscn" id="1_bf8am"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_1sjpx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vvq6"]
+size = Vector2(10, 15)
+
+[node name="Bed" instance=ExtResource("1_bf8am")]
+mat_1_name = "wood"
+mat_1_quantiy = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1sjpx")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(8, 8.5)
+shape = SubResource("RectangleShape2D_2vvq6")
