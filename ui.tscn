@@ -45,6 +45,10 @@ text = "Wall"
 layout_mode = 2
 text = "Door"
 
+[node name="BuildStorage" type="Button" parent="UILayer/Orders" groups=["Button"]]
+layout_mode = 2
+text = "Storage"
+
 [node name="CursorImage" type="Sprite2D" parent="."]
 texture = ExtResource("2_1menl")
 centered = false
@@ -54,3 +58,4 @@ region_rect = Rect2(0, 64, 16, 16)
 [connection signal="pressed" from="UILayer/Orders/BuildBed" to="." method="_on_build_bed_pressed"]
 [connection signal="pressed" from="UILayer/Orders/BuildWall" to="." method="_on_build_wall_pressed"]
 [connection signal="pressed" from="UILayer/Orders/BuildDoor" to="." method="_on_build_door_pressed"]
+[connection signal="pressed" from="UILayer/Orders/BuildStorage" to="." method="_on_build_storage_pressed"]

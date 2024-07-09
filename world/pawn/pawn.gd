@@ -29,6 +29,7 @@ var gathering = false
 var item_to_gather: Item = null
 var finding_building = false
 var constructing = false
+var finding_storage = false
 
 func _ready():
 	pass
@@ -44,9 +45,11 @@ func _process(_delta):
 	hunger_level_bar.value = hunger_level / max_hunger_level
 	debug_label.text = ""
 	if current_task != null:
-		debug_label.text += current_task.get_task_type_name()
+		debug_label.text += current_task.get_task_type_name() + "\n"
 	else:
-		debug_label.text += "doing nothing"
+		debug_label.text += "doing nothing" + "\n"
+	
+	debug_label.text += "inventory: %s" % inventory.size()
 
 func _physics_process(delta):
 	hunger_level -= delta
@@ -68,7 +71,11 @@ func _physics_process(delta):
 func do_current_task(food_available):
 	if current_task == null:
 		current_task = TaskManager.request_task()
-		
+
+	if current_task == null and ItemManager.any("storage") and ItemManager.any_types([Item.ItemType.FOOD, Item.ItemType.MATERIAL], false):
+		current_task = TaskManager.create_haul_task()
+		return
+	
 	if current_task == null:
 		return
 		
@@ -121,7 +128,7 @@ func do_current_task(food_available):
 		current_task = current_task.request_next_task()
 		
 	elif not gathering and current_task.type == Task.TaskType.GATHER_MATS:
-		var mat = ItemManager.find_nearest_item_by_name(current_task.item_to_find, position)
+		var mat: Item = ItemManager.find_nearest_item_by_name(current_task.item_to_find, position)
 		if mat != null:
 			gathering = true
 			path = pathfinding.request_path(global_position / 16, mat.global_position / 16)
@@ -172,7 +179,38 @@ func do_current_task(food_available):
 			if building.health >= building.max_health:
 				building.blue_print = false
 				current_task = current_task.request_next_task()
-			
+				ItemManager.items.append(building)
+
+	elif current_task.type == Task.TaskType.FIND_HAUL and current_task.target_item == null:
+		var nearest_haul = ItemManager.find_nearest_item_by_types([Item.ItemType.FOOD, Item.ItemType.MATERIAL], position, false)
+		if nearest_haul != null:
+			path = pathfinding.request_path(global_position / 16, nearest_haul.global_position / 16)
+			current_task.target_item = nearest_haul
+			ItemManager.reserve_item(nearest_haul)
+		else:
+			current_task = null
+	elif current_task.type == Task.TaskType.HAUL:
+		inventory.append(current_task.target_item)
+		current_task.target_item.in_storage = true
+		current_task = current_task.request_next_task()
+	elif not finding_storage and current_task.type == Task.TaskType.FIND_STORAGE:
+		finding_storage = true
+		var nearest_storage = ItemManager.find_nearest_item_by_name("storage", position)
+		if nearest_storage != null:
+			current_task.target_item = nearest_storage
+			path = pathfinding.request_path(global_position / 16, nearest_storage.global_position / 16)
+	elif current_task.type == Task.TaskType.STORE:
+		var storage: Storage = current_task.target_item as Storage
+		
+		for item in inventory:
+			item.global_position = storage.global_position
+			item.storage = storage
+		
+		storage.inventory.append_array(inventory)
+		ItemManager.items.append_array(inventory)
+		inventory.clear()
+		current_task = current_task.request_next_task()
+
 func follow_path(delta):
 	if path.size() > 0:
 		var direction = global_position.direction_to(path[0])
@@ -198,14 +236,24 @@ func follow_path(delta):
 			
 		if current_task != null and gathering and current_task.type == Task.TaskType.GATHER_MATS:
 			inventory.append(item_to_gather)
-			item_to_gather.visible = false
+			if item_to_gather.storage != null:
+				item_to_gather.storage.inventory.erase(item_to_gather)
+			else:
+				item_to_gather.in_storage = true
 			item_to_gather = null
 			gathering = false
 			current_task = current_task.request_next_task()
-			print(current_task.get_task_type_name())
+			print("gather next task: " + current_task.get_task_type_name())
 		
 		if current_task != null and finding_building and current_task.type == Task.TaskType.FIND_BUILDING:
 			finding_building = false
+			current_task = current_task.request_next_task()
+			
+		if current_task != null and current_task.target_item != null and current_task.type == Task.TaskType.FIND_HAUL:
+			current_task = current_task.request_next_task()
+			
+		if current_task != null and finding_storage and current_task.type == Task.TaskType.FIND_STORAGE:
+			finding_storage = false
 			current_task = current_task.request_next_task()
 		
 	

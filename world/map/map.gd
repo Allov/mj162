@@ -20,12 +20,23 @@ func _ready():
 
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seed_name.hash()
-
+	
 	var noise = FastNoiseLite.new()
 	noise.seed = seed_name.hash()
+	noise.frequency = 0.008
+	noise.fractal_weighted_strength = .1
 	for y in height:
 		for x in width:
 			var value = noise.get_noise_2d(x, y)
+			
+			var flip_flag = 0
+			if randf() > 0.5:
+				flip_flag = TileSetAtlasSource.TRANSFORM_FLIP_H
+			elif randf() > 0.5:
+				flip_flag = TileSetAtlasSource.TRANSFORM_FLIP_V
+			elif randf() > 0.5:
+				flip_flag = TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_FLIP_H
+
 			if value < -0.6:
 				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.DEEP_WATER])
 			elif value >= -0.6 and value < -0.4:
@@ -37,7 +48,7 @@ func _ready():
 				elif rng.randf() < 0.01:
 					ItemManager.spawn_item_by_name("seaweed", Vector2(x * 16, y * 16))
 			elif value >= -0.4 and value < -0.2:
-				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.DIRT])
+				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.DIRT], 0 | flip_flag)
 				if rng.randf() < 0.01:
 					ItemManager.spawn_item_by_name("berry_bush", Vector2(x * 16, y * 16))
 				elif rng.randf() < 0.001:
@@ -54,12 +65,16 @@ func _ready():
 					ItemManager.spawn_item_by_name("skeleton", Vector2(x * 16, y * 16))
 			else:
 				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.ROCK])
-	
-	var food_kinds = ["meat", "wood", "bone"]
 
-	for i in 15:
-		var kind = food_kinds[rng.randi_range(0, food_kinds.size() - 1)]
-		ItemManager.spawn_item_by_name(kind, Vector2(rng.randi_range(0, 25) * 16, rng.randi_range(0, 25) * 16))
+
+	
+	var spawn_items = ["meat", "wood", "bone"]
+	var count = 25
+	var range = Vector2(0, 16)
+
+	for i in count:
+		var kind = spawn_items[rng.randi_range(0, spawn_items.size() - 1)]
+		ItemManager.spawn_item_by_name(kind, Vector2(rng.randi_range(range.x, range.y) * 16, rng.randi_range(range.x, range.y) * 16))
 
 func _process(_delta):
 	pass

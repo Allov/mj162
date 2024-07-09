@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cerc410ym5gvb"]
+[gd_scene load_steps=9 format=3 uid="uid://cerc410ym5gvb"]
 
 [ext_resource type="Script" path="res://world/map/map.gd" id="1_2ugj7"]
 [ext_resource type="Texture2D" uid="uid://ekfyuy6vcrw5" path="res://assets/tileset.png" id="2_r1j7h"]
@@ -24,11 +24,17 @@ custom_data_layer_0/name = "difficulty"
 custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_lwvc1")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d5cuj"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xk2b1"]
+noise = SubResource("FastNoiseLite_d5cuj")
+
 [node name="Map" type="Node2D"]
 script = ExtResource("1_2ugj7")
 width = 256
 height = 256
-seed_name = "malicieux"
+seed_name = "heat"
 
 [node name="Terrain" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_sgke4")
@@ -45,3 +51,9 @@ position = Vector2(96, 32)
 
 [node name="Pawn3" parent="." instance=ExtResource("3_i0pss")]
 position = Vector2(160, 80)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_xk2b1")

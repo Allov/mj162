@@ -4,26 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_im524"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6weai"]
-size = Vector2(23, 29)
+size = Vector2(37, 44)
 
 [node name="Tree" instance=ExtResource("1_utryu")]
 drop_item_name = "wood"
 drop_quantity = 10
 item_name = "tree"
 
+[node name="SelectArea" parent="." index="0"]
+position = Vector2(-23, -26)
+
 [node name="CollisionShape2D" parent="SelectArea" index="0"]
-position = Vector2(15.5, 18.5)
+position = Vector2(22.5, 26)
 shape = SubResource("RectangleShape2D_6weai")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
-position = Vector2(1, 1)
+position = Vector2(-22, -25)
 texture = ExtResource("2_im524")
 centered = false
 region_enabled = true
-region_rect = Rect2(32, 16, 32, 32)
+region_rect = Rect2(96, 16, 48, 48)
 
 [node name="HealthBar" parent="." index="2"]
-offset_left = 9.0
-offset_top = 32.0
-offset_right = 25.0
-offset_bottom = 33.0
+offset_left = -7.0
+offset_top = 21.0
+offset_right = 9.0
+offset_bottom = 22.0

@@ -5,7 +5,22 @@ signal task_done(task: Task)
 
 @export var type: TaskType
 
-enum TaskType { FIND_FOOD, EAT, FIND_HARVEST, HARVEST, WANDER, START_BUILDING_ORDER, FIND_BUILDING, GATHER_MATS, BUILD, ASSEMBLE }
+enum TaskType { 
+	FIND_FOOD, 
+	EAT, 
+	FIND_HARVEST, 
+	HARVEST, 
+	WANDER, 
+	START_BUILDING_ORDER, 
+	FIND_BUILDING, 
+	GATHER_MATS, 
+	BUILD, 
+	ASSEMBLE,
+	FIND_HAUL,
+	HAUL,
+	FIND_STORAGE,
+	STORE
+}
 
 var next_task: Task = null
 var target_item: Item = null
@@ -34,6 +49,14 @@ func get_task_type_name():
 			return "assembling"
 		TaskType.BUILD:
 			return "building"
+		TaskType.FIND_HAUL:
+			return "finding haul"
+		TaskType.HAUL:
+			return "hauling"
+		TaskType.FIND_STORAGE:
+			return "finding storage"
+		TaskType.STORE:
+			return "storing"
 
 func request_next_task():
 	if next_task != null:

@@ -85,6 +85,24 @@ func create_wander_task() -> Task:
 	task.type = Task.TaskType.WANDER
 	
 	return task
+
+func create_haul_task() -> Task:
+	var task = Task.new()
+	task.type = Task.TaskType.FIND_HAUL
+	
+	var haul_task = Task.new()
+	haul_task.type = Task.TaskType.HAUL
+	task.next_task = haul_task
+	
+	var find_storage_task = Task.new()
+	find_storage_task.type = Task.TaskType.FIND_STORAGE
+	haul_task.next_task = find_storage_task
+	
+	var store_task = Task.new()
+	store_task.type = Task.TaskType.STORE
+	find_storage_task.next_task = store_task
+	
+	return task
 	
 	
 	

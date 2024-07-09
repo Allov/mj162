@@ -104,4 +104,10 @@ func _on_build_wall_pressed():
 
 
 func _on_build_door_pressed():
-	pass # Replace with function body.
+	current_ui_mode = UIMode.BUILDING
+	current_blue_print = ItemManager.create_blue_print_by_name("door")
+
+
+func _on_build_storage_pressed():
+	current_ui_mode = UIMode.BUILDING
+	current_blue_print = ItemManager.create_blue_print_by_name("storage")

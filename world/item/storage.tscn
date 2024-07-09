@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://vv37277dxtu1"]
+
+[ext_resource type="PackedScene" uid="uid://b0s01mgv8nmga" path="res://world/item/building.tscn" id="1_7kscw"]
+[ext_resource type="Script" path="res://world/item/storage.gd" id="2_450j5"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_onjmo"]
+[ext_resource type="PackedScene" uid="uid://b77uhmudpc850" path="res://assets/debug_label.tscn" id="4_3aiym"]
+
+[node name="Storage" instance=ExtResource("1_7kscw")]
+script = ExtResource("2_450j5")
+initial_inventory = Array[String]([])
+mat_1_name = "wood"
+mat_1_quantiy = 3
+type = 3
+item_name = "storage"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_onjmo")
+centered = false
+region_enabled = true
+region_rect = Rect2(16, 96, 16, 16)
+
+[node name="DebugLabel" parent="." index="3" instance=ExtResource("4_3aiym")]
+offset_top = 12.0
+offset_bottom = 24.0
+text = "asd"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://nipn0eprcxbj"]
+
+[ext_resource type="PackedScene" uid="uid://b0s01mgv8nmga" path="res://world/item/building.tscn" id="1_gjjdk"]
+[ext_resource type="Texture2D" uid="uid://4g4xgpgoo7r3" path="res://assets/items.png" id="2_cwgqi"]
+
+[node name="Door" instance=ExtResource("1_gjjdk")]
+mat_1_name = "wood"
+mat_1_quantiy = 1
+mat_2_name = "bone"
+mat_2_quantiy = 2
+type = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_cwgqi")
+centered = false
+region_enabled = true
+region_rect = Rect2(32, 96, 16, 16)
