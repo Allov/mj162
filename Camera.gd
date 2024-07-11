@@ -11,12 +11,15 @@ func _ready():
 	pass # Replace with function body.
 	
 func _input(event):
+	var zoom_value = zoom
 	if event.is_action_pressed("zoom_in"):
-		zoom += zoom_speed
+		zoom_value += zoom_speed
 	
 	if event.is_action_pressed("zoom_out"):
-		zoom -= zoom_speed
-		
+		zoom_value -= zoom_speed
+	
+	zoom = zoom_value.clamp(Vector2(0.1, 0.1), Vector2.ONE * 50)
+	
 	if event.is_action_pressed("click") and not dragging:
 		drag_position = get_local_mouse_position()
 		dragging = true

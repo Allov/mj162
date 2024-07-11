@@ -50,22 +50,15 @@ func create_build_task(building: Building):
 	task.target_item = building
 	
 	var previous_task = task
-	for i in building.mat_1_quantiy:
-		var gather_next_task = Task.new()
-		gather_next_task.type = Task.TaskType.GATHER_MATS
-		gather_next_task.item_to_find = building.mat_1_name
-		gather_next_task.quantity_to_find = building.mat_1_quantiy
-		previous_task.next_task = gather_next_task
-		previous_task = gather_next_task
+	for mat in building.mats:
+		for i in building.mats[mat]:
+			var gather_next_task = Task.new()
+			gather_next_task.type = Task.TaskType.GATHER_MATS
+			gather_next_task.item_to_find = mat
+			gather_next_task.quantity_to_find = building.mats[mat]
+			previous_task.next_task = gather_next_task
+			previous_task = gather_next_task
 		
-	for i in building.mat_2_quantiy:
-		var gather_next_task = Task.new()
-		gather_next_task.type = Task.TaskType.GATHER_MATS
-		gather_next_task.item_to_find = building.mat_2_name
-		gather_next_task.quantity_to_find = building.mat_2_quantiy
-		previous_task.next_task = gather_next_task
-		previous_task = gather_next_task
-
 	var find_building_next_task = Task.new()
 	find_building_next_task.type = Task.TaskType.FIND_BUILDING
 	previous_task.next_task = find_building_next_task

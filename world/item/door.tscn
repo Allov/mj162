@@ -8,6 +8,10 @@ mat_1_name = "wood"
 mat_1_quantiy = 1
 mat_2_name = "bone"
 mat_2_quantiy = 2
+mats = {
+"bone": 2,
+"wood": 1
+}
 type = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]

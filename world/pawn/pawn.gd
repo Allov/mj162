@@ -83,7 +83,7 @@ func do_current_task(food_available):
 		var nearest_food = ItemManager.find_nearest_item_by_type(Item.ItemType.FOOD, position)
 		path = pathfinding.request_path(global_position / 16, nearest_food.global_position / 16)
 		current_task.target_item = nearest_food
-		ItemManager.reserve_item(nearest_food)
+		ItemManager.reserve_item(nearest_food)	
 	elif current_task.type == Task.TaskType.EAT and current_task.target_item != null:
 		var food = current_task.target_item
 		hunger_level = clamp(hunger_level + food.nutrition, 0, max_hunger_level)
@@ -120,10 +120,20 @@ func do_current_task(food_available):
 	elif not wandering and current_task.type == Task.TaskType.WANDER:
 		wandering = true
 		
-		var random_target = Vector2(randi_range(-10, 10), randi_range(-10, 10))
+		var wander_distance = 5
+		var random_target = Vector2(randi_range(-wander_distance, wander_distance), randi_range(-wander_distance, wander_distance))
 		random_target = random_target.clamp(Vector2.ZERO, Vector2(map.width, map.height))
 		
-		path = pathfinding.request_path(global_position / 16, global_position / 16 + random_target)
+		var source_id = terrain.get_cell_source_id(0, global_position / 16 + random_target)
+		var source = terrain.tile_set.get_source(source_id)
+		var coords = terrain.get_cell_atlas_coords(0, global_position / 16 + random_target)
+		var data = source.get_tile_data(coords, 0)
+		
+		if (data.get_custom_data("difficulty") > 4.0):
+			current_task = current_task.request_next_task()
+			wandering = false
+		else:
+			path = pathfinding.request_path(global_position / 16, global_position / 16 + random_target)
 	elif current_task.type == Task.TaskType.START_BUILDING_ORDER:
 		current_task = current_task.request_next_task()
 		
@@ -147,20 +157,18 @@ func do_current_task(food_available):
 		
 		if building != null:
 			# first material
-			var items_in_inventory = inventory.filter(func(item: Item): return item.item_name.to_lower().begins_with(building.mat_1_name))
-			if items_in_inventory.size() >= building.mat_1_quantiy:
-				for req_item in items_in_inventory:
-					inventory.erase(req_item)
-					ItemManager.remove_item(req_item)
-					building.mat_1_quantiy -= 1
-				
-				items_in_inventory = inventory.filter(func(item: Item): return item.item_name.to_lower().begins_with(building.mat_2_name))
-				for req_item in items_in_inventory:
-					inventory.erase(req_item)
-					ItemManager.remove_item(req_item)
-					building.mat_2_quantiy -= 1
-				
-				current_task = current_task.request_next_task()
+			for mat in building.mats:
+				var items_in_inventory = inventory_find_items_by_name(mat)
+				if items_in_inventory.size() >= building.mats[mat]:
+					for req_item in items_in_inventory:
+						inventory.erase(req_item)
+						ItemManager.remove_item(req_item)
+						building.mats[mat] -= 1
+						
+						if building.mats[mat] <= 0:
+							break
+			
+			current_task = current_task.request_next_task()
 		else:
 			print("not a building oops.")
 			current_task = null
@@ -210,6 +218,9 @@ func do_current_task(food_available):
 		ItemManager.items.append_array(inventory)
 		inventory.clear()
 		current_task = current_task.request_next_task()
+
+func inventory_find_items_by_name(item_name):
+	return inventory.filter(func(item: Item): return item.item_name.to_lower().begins_with(item_name))
 
 func follow_path(delta):
 	if path.size() > 0:

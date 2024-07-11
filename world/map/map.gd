@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var tile_map: TileMap = $Terrain
 
+
 enum TileType { SAND, WATER, RED_SAND, DIRT, ROCK, DEEP_WATER }
 var tiles_coords = {}
 
@@ -24,7 +25,11 @@ func _ready():
 	var noise = FastNoiseLite.new()
 	noise.seed = seed_name.hash()
 	noise.frequency = 0.008
-	noise.fractal_weighted_strength = .1
+	# noise.fractal_weighted_strength = .1
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	#noise.domain_warp_enabled = true
+	#noise.domain_warp_type = FastNoiseLite.DOMAIN_WARP_SIMPLEX_REDUCED
+	var dirt_cells: Array[Vector2i] = []
 	for y in height:
 		for x in width:
 			var value = noise.get_noise_2d(x, y)
@@ -48,7 +53,9 @@ func _ready():
 				elif rng.randf() < 0.01:
 					ItemManager.spawn_item_by_name("seaweed", Vector2(x * 16, y * 16))
 			elif value >= -0.4 and value < -0.2:
-				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.DIRT], 0 | flip_flag)
+				# tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.DIRT], 0 | flip_flag)
+				# 
+				dirt_cells.append(Vector2i(x, y))
 				if rng.randf() < 0.01:
 					ItemManager.spawn_item_by_name("berry_bush", Vector2(x * 16, y * 16))
 				elif rng.randf() < 0.001:
@@ -67,7 +74,7 @@ func _ready():
 				tile_map.set_cell(0, Vector2i(x, y), 0, tiles_coords[TileType.ROCK])
 
 
-	
+	tile_map.set_cells_terrain_connect(0, dirt_cells, 0, 0)	
 	var spawn_items = ["meat", "wood", "bone"]
 	var count = 25
 	var range = Vector2(0, 16)

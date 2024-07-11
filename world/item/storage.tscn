@@ -10,6 +10,9 @@ script = ExtResource("2_450j5")
 initial_inventory = Array[String]([])
 mat_1_name = "wood"
 mat_1_quantiy = 3
+mats = {
+"wood": 3
+}
 type = 3
 item_name = "storage"
 

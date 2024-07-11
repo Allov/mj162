@@ -9,6 +9,9 @@ size = Vector2(10, 15)
 [node name="Bed" instance=ExtResource("1_bf8am")]
 mat_1_name = "wood"
 mat_1_quantiy = 2
+mats = {
+"wood": 2
+}
 type = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]

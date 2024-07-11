@@ -7,6 +7,8 @@ extends Item
 @export var mat_1_quantiy: int
 @export var mat_2_name: String
 @export var mat_2_quantiy: int
+
+@export var mats: Dictionary
 @onready var health = max_health
 @onready var select_area = $SelectArea
 @onready var sprite = $Sprite2D

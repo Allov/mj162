@@ -18,6 +18,7 @@ mat_1_name = ""
 mat_1_quantiy = 0
 mat_2_name = ""
 mat_2_quantiy = 0
+mats = {}
 
 [node name="SelectArea" type="Area2D" parent="." index="0"]
 
