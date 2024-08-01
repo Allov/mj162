@@ -62,19 +62,19 @@ func _process(_delta):
 	debug_label.text += "Game speed %1.1f\n" % game_speed
 	debug_label.text += "UI Mode: %s\n" % get_ui_mode_text()
 
-	var foods = ItemManager.items.filter(func(item: Item): return item.type == Item.ItemType.FOOD)
+	var foods = ItemManager.find_items_by_type(Item.ItemType.FOOD)
 	debug_label.text += "Foods: %s      " % foods.size()
-
-	var materials = ItemManager.items.filter(func(item: Item): return item.type == Item.ItemType.MATERIAL)
+#
+	var materials = ItemManager.find_items_by_type(Item.ItemType.MATERIAL)
 	debug_label.text += "Materials: %s\n" % materials.size()
-
-	var animals = ItemManager.items.filter(func(item: Item): return item.type == Item.ItemType.ANIMAL)
+#
+	var animals = ItemManager.find_items_by_type(Item.ItemType.ANIMAL)
 	debug_label.text += "Animals: %s    " % animals.size()
-
-	var vegetations = ItemManager.items.filter(func(item: Item): return item.type == Item.ItemType.VEGETATION)
+#
+	var vegetations = ItemManager.find_items_by_type(Item.ItemType.VEGETATION)
 	debug_label.text += "Vegetations: %s\n" % vegetations.size()
-
-	var buildings = ItemManager.items.filter(func(item: Item): return item.type == Item.ItemType.BUILDING)
+#
+	var buildings = ItemManager.find_items_by_type(Item.ItemType.BUILDING)
 	debug_label.text += "Buildings: %s\n" % buildings.size()
 
 	debug_label.text += "Task taken: %s\n" % TaskManager.tasks_log.size()

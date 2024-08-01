@@ -53,7 +53,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	hunger_level -= delta
-	var food_available = ItemManager.items.filter(func(item): return item.type == Item.ItemType.FOOD).size() > 0
+	var food_available = false #ItemManager.items.filter(func(item): return item.type == Item.ItemType.FOOD).size() > 0
 	if current_task == null and hunger_level < max_hunger_level * peckish_treshold and food_available:
 		current_task = TaskManager.request_find_and_eat_food()
 

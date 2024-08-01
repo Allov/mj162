@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgh5kwv7f5gac"]
+[gd_scene load_steps=6 format=3 uid="uid://cgh5kwv7f5gac"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_ldwcv"]
 [ext_resource type="PackedScene" uid="uid://bmppiyvx5loyu" path="res://world/world.tscn" id="1_v5sd0"]
 [ext_resource type="Script" path="res://Camera.gd" id="2_3ad3g"]
 [ext_resource type="PackedScene" uid="uid://cm4mslje6rwxa" path="res://ui.tscn" id="3_f2an1"]
@@ -11,6 +12,7 @@ glow_bloom = 0.15
 glow_blend_mode = 1
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ldwcv")
 
 [node name="World" parent="." instance=ExtResource("1_v5sd0")]
 
